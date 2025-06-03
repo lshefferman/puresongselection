@@ -1,6 +1,9 @@
 const Song = require("../models/songModel");
 const SystemState = require("../models/systemstateModel");
 
+// Maximum number of votes alloted to each user
+const MAX_VOTES_PER_USER = 10;
+
 // get all songs
 const getSongs = async (req, res) => {
   const songs = await Song.find({}).sort({ createdAt: -1 });
@@ -46,7 +49,59 @@ const createSong = async (req, res) => {
   }
 };
 
+const voteSong = async (req, res) => {
+  const { userId } = req.body;
+
+  // Check if voting is allowed in the current stage
+  const systemState = await SystemState.findOne();
+
+  if (systemState.stage !== 2) {
+    return res
+      .status(403)
+      .json({ error: "Voting is not allowed in this stage." });
+  }
+
+  // Count the number of songs the user has voted for
+  const userVoteCount = await Song.countDocuments({ votes: userId });
+  if (userVoteCount >= MAX_VOTES_PER_USER) {
+    return res
+      .status(400)
+      .json({ error: "You have reached the maximum number of votes allowed." });
+  }
+
+  // Add vote if song is found
+  const song = await Song.findById(req.params.id);
+  if (!song) return res.status(404).json({ error: "Song not found" });
+
+  if (song.votes.includes(userId)) {
+    return res.status(400).json({ error: "User already voted for this song" });
+  }
+
+  song.votes.push(userId);
+  await song.save();
+  res.json(song);
+};
+
+const getTopSongs = async (req, res) => {
+  const systemState = await SystemState.findOne();
+  const maxSongs = systemState.maxSongsInSetlist;
+
+  const songs = await Song.find().populate("suggestedBy", "name instrument");
+
+  const sorted = songs
+    .map((song) => ({
+      ...song.toObject(),
+      voteCount: song.votes.length,
+    }))
+    .sort((a, b) => b.voteCount - a.voteCount)
+    .slice(0, maxSongs);
+
+  res.json(sorted);
+};
+
 module.exports = {
   getSongs,
   createSong,
+  voteSong,
+  getTopSongs,
 };
