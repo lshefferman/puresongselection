@@ -12,6 +12,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    desiredSongCount: {
+      type: Number,
+      required: true,
+    },
     email: {
       type: String,
       unique: true,

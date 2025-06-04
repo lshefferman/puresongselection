@@ -1,10 +1,16 @@
-const User = require("../models/User");
+const User = require("../models/userModel");
 
 // Create a user
 const createUser = async (req, res) => {
   try {
-    const { name, instrument, email, role } = req.body;
-    const user = await User.create({ name, instrument, email, role });
+    const { name, instrument, desiredSongCount, email, role } = req.body;
+    const user = await User.create({
+      name,
+      instrument,
+      desiredSongCount,
+      email,
+      role,
+    });
     res.status(200).json(user);
   } catch (error) {
     res.status(400).json({ error: error.message });

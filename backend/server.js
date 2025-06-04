@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const songRoutes = require("./routes/songs");
 const systemRoutes = require("./routes/system");
 const userRoutes = require("./routes/users");
+const preferenceRoutes = require("./routes/preferences");
+const assignmentRoutes = require("./routes/assignments");
 const SystemState = require("./models/systemstateModel");
 
 // express app
@@ -22,6 +24,8 @@ app.use((req, res, next) => {
 app.use("/api/songs", songRoutes);
 app.use("/api/system", systemRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/preferences", preferenceRoutes);
+app.use("/api/assignments", assignmentRoutes);
 
 // connect to db
 mongoose
