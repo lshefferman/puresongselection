@@ -8,6 +8,10 @@ const songSchema = new Schema(
       type: String,
       required: true,
     },
+    link: {
+      type: String,
+      required: true,
+    },
     suggestedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

@@ -22,8 +22,14 @@ const createSong = async (req, res) => {
   }
 
   // get fields from request body
-  const { title, suggestedBy, leaderInstrument, requiredInstruments, votes } =
-    req.body;
+  const {
+    title,
+    link,
+    suggestedBy,
+    leaderInstrument,
+    requiredInstruments,
+    votes,
+  } = req.body;
 
   // only allow users to submit 2 songs max
   const existingCount = await Song.countDocuments({ suggestedBy });
@@ -38,6 +44,7 @@ const createSong = async (req, res) => {
   try {
     const song = await Song.create({
       title,
+      link,
       suggestedBy,
       leaderInstrument,
       requiredInstruments,
