@@ -1,13 +1,242 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Root variables */
+:root {
+  --primary: #1aac83;
+  --error: #e7195a;
+  --light-bg: #f1f1f1;
+  --text: #333;
+  --radius: 6px;
+  --shadow: 2px 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Reset & Body */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--light-bg);
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+header .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+header a:hover {
+  text-decoration: underline;
+}
+
+/* Page container */
+.pages {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Stage 1 Layout */
+.stage1 {
+  display: grid;
+  gap: 40px;
+  padding-top: 20px;
+}
+
+.stage1 h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+/* Card Styles (Forms & Lists) */
+.song-form,
+.song-list {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.song-list h4 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+.song-list p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.song-list span {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--light-bg);
+  padding: 6px 10px;
+  border-radius: 50%;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.song-list span:hover {
+  background: #ddd;
+}
+
+/* Stage 2 Layout */
+.stage2 {
+  display: grid;
+  gap: 40px;
+  padding-top: 20px;
+}
+
+.stage2 h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+/* Card Styles (Forms & Lists) */
+.vote-status {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+.song-vote {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+
+.song-vote h4 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+.song-vote p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.song-vote span {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--light-bg);
+  padding: 6px 10px;
+  border-radius: 50%;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.song-vote span:hover {
+  background: #ddd;
+}
+
+.song-vote button {
+  background: var(--primary);
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+/* Stage 3 Layout */
+.stage3 {
+  display: grid;
+  gap: 40px;
+  padding-top: 20px;
+}
+
+.stage3 h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+/* Card Styles (Forms & Lists) */
+.final-setlist {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+
+/* Form Elements */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background-color: #f9fdfc;
+}
+
+/* Form Button */
+form button {
+  background: var(--primary);
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background: #159c72;
+}
+
+/* Error States */
+div.error {
+  padding: 12px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: var(--radius);
+  margin: 20px 0;
+}
+
+input.error {
+  border: 1px solid var(--error);
+  background: #fff5f7;
 }

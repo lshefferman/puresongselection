@@ -3,10 +3,14 @@ import SongList from "../components/SongList";
 
 const Stage1 = () => {
   return (
-    <div>
+    <div className="stage1">
       <h2>Stage 1: Song Suggestions</h2>
-      <SongForm />
-      <SongList />
+      <div className="song-form">
+        <SongForm />
+      </div>
+      <div className="song-list">
+        <SongList />
+      </div>
     </div>
   );
 };

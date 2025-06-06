@@ -3,10 +3,14 @@ import VoteStatus from "../components/VoteStatus";
 
 const Stage2 = () => {
   return (
-    <div>
+    <div className="stage2">
       <h2>Stage 2: Song Voting</h2>
-      <VoteStatus />
-      <SongVote />
+      <div className="vote-status">
+        <VoteStatus />
+      </div>
+      <div className="song-vote">
+        <SongVote />
+      </div>
     </div>
   );
 };
