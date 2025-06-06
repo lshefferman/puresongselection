@@ -7,18 +7,16 @@ async function generateAssignments() {
   const users = await User.find({});
   const preferences = await Preference.find({});
 
-  const assignments = [];
-
   for (const song of topSongs) {
-    const leader = song.suggestedBy.toString();
-    const neededInstruments = song.instruments;
+    const leaderId = song.suggestedBy.toString();
+    const neededInstruments = song.instruments; // or requiredInstruments
 
     const songAssignments = [];
 
     for (const instrument of neededInstruments) {
       const matchingUsers = users
         .filter(
-          (u) => u.instrument === instrument && u._id.toString() !== leader
+          (u) => u.instrument === instrument && u._id.toString() !== leaderId
         )
         .map((u) => {
           const pref = preferences.find(
@@ -28,7 +26,7 @@ async function generateAssignments() {
           );
           return {
             user: u,
-            score: pref.score || 0,
+            score: pref?.score || 0,
             currentCount: 0,
           };
         })
@@ -40,30 +38,30 @@ async function generateAssignments() {
         );
         if (selected) {
           songAssignments.push({
-            userId: selected.user._id,
-            name: selected.user.name,
+            user: selected.user._id,
             instrument,
             isLeader: false,
           });
           selected.currentCount += 1;
         }
       }
+    }
+
+    // Add the leader
+    const leaderUser = users.find((u) => u._id.toString() === leaderId);
+    if (leaderUser) {
       songAssignments.push({
-        userId: leader,
-        name: users.find((u) => u._id.toString() === leader)?.name || "Unknown",
-        instrument:
-          users.find((u) => u._id.toString() === leader)?.instrument ||
-          "unknown",
+        user: leaderUser._id,
+        instrument: leaderUser.instrument,
         isLeader: true,
       });
     }
-    assignments.push({
-      songId: song._id,
-      title: song.title,
-      members: songAssignments,
-    });
-  }
-  return assignments;
-}
 
+    // Save to the Song model
+    song.assignedMembers = songAssignments;
+    await song.save();
+  }
+
+  return true; // Or return the updated songs if needed
+}
 module.exports = generateAssignments;

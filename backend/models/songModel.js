@@ -25,6 +25,13 @@ const songSchema = new Schema(
       type: [String],
       required: true,
     },
+    assignedMembers: [
+      {
+        user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        instrument: String,
+        isLeader: Boolean,
+      },
+    ],
     votes: [
       {
         type: mongoose.Schema.Types.ObjectId,

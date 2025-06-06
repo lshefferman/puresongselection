@@ -1,7 +1,7 @@
 const Song = require("../models/songModel");
 const SystemState = require("../models/systemstateModel");
 
-// Maximum number of votes alloted to each user
+// Maximum number of votes alloted to each user (same in frontend)
 const MAX_VOTES_PER_USER = 10;
 
 // get all songs

@@ -1,7 +1,10 @@
+import FinalSetlist from "../components/FinalSetlist";
+
 const Stage3 = () => {
   return (
-    <div className="home">
-      <h2>Stage Three</h2>
+    <div>
+      <h2>Stage 3: Final Setlist and Assignments!</h2>
+      <FinalSetlist />
     </div>
   );
 };

@@ -1,7 +1,12 @@
+import SongVote from "../components/SongVote";
+import VoteStatus from "../components/VoteStatus";
+
 const Stage2 = () => {
   return (
-    <div className="home">
-      <h2>Stage Two</h2>
+    <div>
+      <h2>Stage 2: Song Voting</h2>
+      <VoteStatus />
+      <SongVote />
     </div>
   );
 };

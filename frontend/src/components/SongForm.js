@@ -1,6 +1,6 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { SongsContext } from "../context/SongsContext"; // Optional, if using
+import { SongsContext } from "../context/SongsContext";
 
 const SongForm = () => {
   const { user } = useContext(UserContext);
@@ -15,13 +15,25 @@ const SongForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!user) {
+      setError("User not logged in or loaded.");
+      return;
+    }
+
     const song = {
       title,
       link,
-      requiredInstruments: requiredInstruments.split(",").map((s) => s.trim()), // convert to array
+      requiredInstruments: requiredInstruments.split(",").map((s) => s.trim()),
       suggestedBy: user._id,
       leaderInstrument: user.instrument,
     };
+
+    console.log("Submitting song with:", {
+      title,
+      link,
+      requiredInstruments,
+      user,
+    });
 
     const response = await fetch("/api/songs", {
       method: "POST",
