@@ -3,10 +3,12 @@ import Stage1 from "../pages/Stage1";
 import Stage2 from "../pages/Stage2";
 import Stage3 from "../pages/Stage3";
 import NotFound from "../pages/NotFound";
+import Home from "../pages/Home";
 
 export default function AppRouter() {
   return (
     <Routes>
+      <Route path="/" element={<Home />} />
       <Route path="/stage1" element={<Stage1 />} />
       <Route path="/stage2" element={<Stage2 />} />
       <Route path="/stage3" element={<Stage3 />} />

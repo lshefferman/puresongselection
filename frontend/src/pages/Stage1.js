@@ -1,9 +1,11 @@
+import Navbar from "../components/Navbar";
 import SongForm from "../components/SongForm";
 import SongList from "../components/SongList";
 
 const Stage1 = () => {
   return (
     <div className="stage1">
+      <Navbar />
       <h2>Stage 1: Song Suggestions</h2>
       <div className="song-form">
         <SongForm />

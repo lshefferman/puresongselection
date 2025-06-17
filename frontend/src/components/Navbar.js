@@ -12,7 +12,9 @@ const Navbar = () => {
           {user ? (
             <>
               <span>Hi, {user}</span>
-              <button onClick={logout}>Logout</button>
+              <button className="login-button" onClick={logout}>
+                Logout
+              </button>
             </>
           ) : (
             <button onClick={login}>Login with Princeton</button>

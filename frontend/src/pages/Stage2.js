@@ -1,9 +1,11 @@
+import Navbar from "../components/Navbar";
 import SongVote from "../components/SongVote";
 import VoteStatus from "../components/VoteStatus";
 
 const Stage2 = () => {
   return (
     <div className="stage2">
+      <Navbar />
       <h2>Stage 2: Song Voting</h2>
       <div className="vote-status">
         <VoteStatus />
